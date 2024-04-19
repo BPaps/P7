@@ -3,7 +3,7 @@ import csv
 class OutputHandler:
     """
     Handles writing transaction data to CSV files.
-    
+
     Attributes:
         account_summaries (dict): A dictionary containing account summaries.
         suspicious_transactions (list): A list of suspicious transactions.
@@ -48,7 +48,7 @@ class OutputHandler:
     @property
     def transaction_statistics(self):
         """
-         Getter method for transaction statistics.
+        Getter method for transaction statistics.
 
         Returns:
             dict: Transaction statistics.
@@ -57,7 +57,7 @@ class OutputHandler:
 
     def write_account_summaries_to_csv(self, file_path: str) -> None:
         """
-         Writes account summaries to a CSV file.
+        Writes account summaries to a CSV file.
 
         Args:
             file_path (str): The path to the CSV file.
