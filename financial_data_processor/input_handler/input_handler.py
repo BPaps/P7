@@ -1,46 +1,33 @@
 import csv
 import json
-from typing import List, Dict
 
 class InputHandler:
     """
-    Class to handle input data from CSV or JSON files.
+    Class for handling input data.
     """
 
     def __init__(self, file_path: str):
         """
         Initialize InputHandler with the file path.
-        
-        Args:
-            file_path (str): The path to the input file.
         """
         self.__file_path = file_path
 
     @property
-    def file_path(self) -> str:
+    def file_path(self):
         """
         Get the file path.
-
-        Returns:
-            str: The file path.
         """
         return self.__file_path
 
     def get_file_format(self) -> str:
         """
-        Get the file format of the input file.
-
-        Returns:
-            str: The file format (e.g., 'csv', 'json').
+        Get the file format.
         """
         return self.__file_path.split('.')[-1]
 
-    def read_input_data(self) -> List[Dict]:
+    def read_input_data(self) -> list:
         """
-        Read input data from the file.
-        
-        Returns:
-            list: A list of dictionaries containing the input data.
+        Read input data.
         """
         data = []
         file_format = self.get_file_format()
@@ -50,15 +37,9 @@ class InputHandler:
             data = self.read_json_data()
         return data
 
-    def read_csv_data(self) -> List[Dict]:
+    def read_csv_data(self) -> list:
         """
         Read data from a CSV file.
-        
-        Returns:
-            list: A list of dictionaries containing the CSV data.
-        
-        Raises:
-            FileNotFoundError: If the file does not exist.
         """
         input_data = []
         try:
@@ -67,18 +48,13 @@ class InputHandler:
                 for row in reader:
                     input_data.append(row)
             return input_data
+        
         except FileNotFoundError:
             raise FileNotFoundError(f"File: {self.__file_path} does not exist.")
 
-    def read_json_data(self) -> List[Dict]:
+    def read_json_data(self) -> list:
         """
         Read data from a JSON file.
-        
-        Returns:
-            list: A list of dictionaries containing the JSON data.
-        
-        Raises:
-            FileNotFoundError: If the file does not exist.
         """
         try:
             with open(self.__file_path, 'r') as input_file:
@@ -86,3 +62,36 @@ class InputHandler:
             return input_data
         except FileNotFoundError:
             raise FileNotFoundError(f"File: {self.__file_path} does not exist.")
+
+    def data_validation(self, data: list) -> list:
+        """
+        Validate input data.
+        """
+        valid_data = []
+        for record in data:
+            if self.validate_amount(record['Amount']) and self.validate_transaction_type(record['Transaction type']):
+                valid_data.append(record)
+        return valid_data
+
+    def validate_amount(self, amount: str) -> bool:
+        """
+        Validate the amount field.
+        """
+        try:
+            amount_float = float(amount)
+            if amount_float >= 0:
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+
+    def validate_transaction_type(self, transaction_type: str) -> bool:
+        """
+        Validate the transaction type field.
+        """
+        valid_types = ['deposit', 'withdrawal', 'transfer']
+        if transaction_type.lower() in valid_types:
+            return True
+        else:
+            return False
