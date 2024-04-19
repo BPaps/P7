@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(r"C:\Users\Inti\OneDrive\Desktop\courses\software_development_fundamentals\projects\assignment_7\P7\financial_data_processor")
+import unittest
 from unittest import TestCase 
 from unittest.mock import mock_open, patch, Mock
 from input_handler.input_handler import InputHandler
