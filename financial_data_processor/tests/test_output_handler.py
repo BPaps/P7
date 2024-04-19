@@ -1,8 +1,10 @@
 import sys
-from unittest import mock, TestCase
 sys.path.append(r"C:\Users\abhay\Desktop\RRC_Polytech\Courses\COMP-1327_Software_Development_Fundamentals\Projects\assignment_07\P7\financial_data_processor")
-from unittest.mock import patch, mock_open
+
 import unittest
+from unittest import TestCase
+from unittest.mock import patch, mock_open
+
 from output_handler.output_handler import OutputHandler
 
 class TestOutputHandler(TestCase):
@@ -17,7 +19,7 @@ class TestOutputHandler(TestCase):
 
     TRANSACTION_STATISTICS = {'deposit': {'total_amount': 300, 'transaction_count': 2}, 
                             'withdrawal': {'total_amount': 50, 'transaction_count': 1}}
-
+        
     @patch('output_handler.output_handler.csv.writer')
     @patch('builtins.open', new_callable=mock_open)
     def test_write_account_summaries_to_csv(self, mock_open_file, mock_csv_writer):
