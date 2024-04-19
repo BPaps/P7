@@ -3,9 +3,9 @@ Description
 Group Financial Data Processing assignment.
 
 # Authors
-- Developer 1: {Enter Student Name Here}
-- Developer 2: {Enter Student Name Here}
-- Developer 3: {Enter Student Name Here}
+- Developer 1: Inti Brito Diaz
+- Developer 2: Ben Papineau
+- Developer 3: Abhay Singh
 
 # Milestone 1
 ## Developer 1 Tasks (Issue 1):
